@@ -49,7 +49,7 @@ class UploadForm(FlaskForm):
     pdf_file = FileField(
         validators=[
             FileRequired(),
-            FileAllowed(["pdf"], "Please select a PDF."),
+            FileAllowed(["pdf"], "Please load a PDF."),
         ],
         label="Select a PDF",
     )
@@ -59,13 +59,15 @@ class UploadForm(FlaskForm):
 
 vertexai.init(project=os.environ["PROJECT_ID"], location="us-central1")
 
-model = GenerativeModel("gemini-pro")
+model = GenerativeModel("gemini-1.0-pro-002")
+
+
 
 generation_config = GenerationConfig(
     temperature=0.3,
     top_p=0.6,
     candidate_count=1,
-    max_output_tokens=4096,
+    max_output_tokens=8192,
 )
 
 
@@ -84,7 +86,7 @@ def index():
         logging.debug(f"word_count combined: {word_count}")
         # 18500 words times ~1.66 tokens per words should keep us under Gemini's token limit:
         # https://ai.google.dev/models/gemini#model-variations
-        if word_count < 18500:
+        if word_count < 250000:
             prompt = f"{form.text_input.data} Use information from the PDF to respond.\n\nPDF:\n{combined_text}"
             logging.debug(prompt)
             response = model.generate_content(
