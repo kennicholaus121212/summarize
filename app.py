@@ -59,7 +59,8 @@ class UploadForm(FlaskForm):
 
 vertexai.init(project=os.environ["PROJECT_ID"], location="us-central1")
 
-model = GenerativeModel("gemini-1.0-pro-002")
+#model = GenerativeModel("gemini-1.0-pro-002")
+model = GenerativeModel("gemini-1.5-pro-preview-0409")
 
 
 
