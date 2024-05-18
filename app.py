@@ -29,6 +29,7 @@ from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm, CSRFProtect
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms.fields import SubmitField, TextAreaField
+from PyPDF2 import PdfReader
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -53,6 +54,8 @@ class UploadForm(FlaskForm):
         ],
         label="Select a PDF",
     )
+    #pdf_file = '/Resume1.pdf'
+    
     text_input = TextAreaField(label="Instructions", default="Summarize the PDF.")
     submit = SubmitField()
 
@@ -79,6 +82,7 @@ def index():
     if form.validate_on_submit():
         pdf_temp_filename = str(uuid.uuid4())
         form.pdf_file.data.save(pdf_temp_filename)
+        #loader = PyPDFLoader('/Resume1.pdf')
         loader = PyPDFLoader(pdf_temp_filename)
         pages = loader.load_and_split()
         combined_text = "\n\n".join([p.page_content for p in pages])
@@ -88,7 +92,7 @@ def index():
         # 18500 words times ~1.66 tokens per words should keep us under Gemini's token limit:
         # https://ai.google.dev/models/gemini#model-variations
         if word_count < 250000:
-            prompt = f"{form.text_input.data} Use information from the PDF to respond.\n\nPDF:\n{combined_text}"
+            prompt = f"{form.text_input.data} Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
             logging.debug(prompt)
             response = model.generate_content(
                 prompt, generation_config=generation_config
