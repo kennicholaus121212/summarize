@@ -40,7 +40,7 @@ class UploadForm(FlaskForm):
     # )
     pdf_file = 'Resume1.pdf'  # Load 'Resume1.pdf' automatically
 
-    text_input = TextAreaField(label="Instructions", default="Summarize the PDF.")
+    text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholaus resume in 20 lines.")
     submit = SubmitField()
 
 
@@ -52,7 +52,7 @@ model = GenerativeModel("gemini-1.5-pro-preview-0409")
 
 
 generation_config = GenerationConfig(
-    temperature=0.3,
+    temperature=0.2,
     top_p=0.6,
     candidate_count=1,
     max_output_tokens=8192,
@@ -80,7 +80,7 @@ def index():
         # Check if the text is too long for the model
         if word_count < 1000000:
             # Create the prompt
-            prompt = f"{form.text_input.data} The PDF data contains Kenneth Nicholaus resume. He is interested in a generative ai architect position. You as a candidate respond in a professional way emphasizing his AI skills and experience. Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
+            prompt = f"{form.text_input.data} The PDF data contains Kenneth Nicholaus resume. He is interested in a generative ai architect position. You should respond in a professional way emphasizing his generative AI skills and experience. Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
 
             # Generate the response
             response = model.generate_content(
