@@ -40,7 +40,7 @@ class UploadForm(FlaskForm):
     # )
     pdf_file = 'resume4.pdf'  # Load 'Resume1.pdf' automatically
 
-    text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholaus resume in 20 lines.")
+    text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholas's fit for the job with 20 bullet points.")
     submit = SubmitField()
 
 
@@ -52,8 +52,8 @@ model = GenerativeModel("gemini-1.5-pro-preview-0409")
 
 
 generation_config = GenerationConfig(
-    temperature=0.2,
-    top_p=0.6,
+    temperature=0.1,
+    top_p=0.8,
     candidate_count=1,
     max_output_tokens=8192,
 )
