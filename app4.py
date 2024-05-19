@@ -38,7 +38,7 @@ class UploadForm(FlaskForm):
     #     ],
     #     label="Select a PDF",
     # )
-    pdf_file = 'resume3.pdf'  # Load 'Resume1.pdf' automatically
+    pdf_file = 'resume4.pdf'  # Load 'Resume1.pdf' automatically
 
     text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholaus resume in 20 lines.")
     submit = SubmitField()
@@ -66,7 +66,7 @@ def index():
     if form.validate_on_submit():
         # Load the PDF file automatically
         #pdf_file_path = form.pdf_file.data  # Get the PDF file path
-        pdf_file_path = 'resume3.pdf'
+        pdf_file_path = 'resume4.pdf'
         # Load and parse the PDF
         loader = PyPDFLoader(pdf_file_path)
         pages = loader.load_and_split()
