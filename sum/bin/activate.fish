@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/student_03_f3f19b7c21eb/summarize/sum"
+set -gx VIRTUAL_ENV "/home/student_03_fbf901466d59/summarize/sum"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
