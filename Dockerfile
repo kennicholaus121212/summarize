@@ -18,4 +18,4 @@ COPY . ./
 RUN pip install -r requirements.txt
 
 EXPOSE 8080
-ENTRYPOINT ["python3", "app4.py", "--server.port=8080", "--server.address=0.0.0.0"]
+ENTRYPOINT ["python3", "app5.py", "--server.port=8080", "--server.address=0.0.0.0"]
