@@ -38,8 +38,8 @@ class UploadForm(FlaskForm):
     #     ],
     #     label="Select a PDF",
     # )
-    pdf_file = 'resume4.pdf'  # Load 'Resume1.pdf' automatically
-
+    pdf_file = 'resume5.pdf'  # Load 'Resume1.pdf' automatically
+    text_input1 = TextAreaField(label="Job Descriptions", default="Paste Job Description Here.")
     text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholaus's fit for the job with 20 bullet points.")
     submit = SubmitField()
 
@@ -66,7 +66,7 @@ def index():
     if form.validate_on_submit():
         # Load the PDF file automatically
         #pdf_file_path = form.pdf_file.data  # Get the PDF file path
-        pdf_file_path = 'resume4.pdf'
+        pdf_file_path = 'resume5.pdf'
         # Load and parse the PDF
         loader = PyPDFLoader(pdf_file_path)
         pages = loader.load_and_split()
@@ -80,7 +80,13 @@ def index():
         # Check if the text is too long for the model
         if word_count < 1000000:
             # Create the prompt
-            prompt = f"{form.text_input.data} The PDF data contains Kenneth Nicholaus resume. Please incorporate all information from the document when answering questions. He is interested in a Lead Engineer - Generative AI Product Engineering  position for Capital One. You should respond in a professional way emphasizing the following responibilities. You will work as part of our Enterprise AI team and build systems that will enable our users to work with Large-Language Models (LLMs) and Foundation Models (FMs), using our public cloud infrastructure. You will work with a team of world-class AI engineers and researchers to design and implement key API products and services that enable real-time customer-facing applications. Architect, build and deploy well-managed core APIs and SDKs to access LLMs and our proprietary FMs including training, fine-tuning and prompting tasks, including orchestration SDKs. Design APIs for performance, real-time applications, scale, ease of use and governance automation. Develop application-specific interfaces that leverage LLMs and FMs to continue to enhance the associate and customer experience. Enable our users to build new GenAI capabilities. Develop tools and processes to monitor API access patterns and operational health. Design and implement AI safety and guardrails in the API layer working closely with researchers. Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
+            prompt = f"""{form.text_input.data}
+
+            The PDF data contains Kenneth Nicholaus resume. Please incorporate all information from the document when answering questions. 
+            He is interested in a job description {form.text_input1.data}
+            Use information only from the PDF to respond to questions that relevant to the job description.
+            PDF:
+            {combined_text}"""
             # Generate the response
             response = model.generate_content(
                 prompt, generation_config=generation_config
