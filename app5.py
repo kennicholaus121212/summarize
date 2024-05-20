@@ -40,7 +40,7 @@ class UploadForm(FlaskForm):
     )
     #pdf_file = 'resume5.pdf'  # Load 'Resume1.pdf' automatically
     text_input1 = TextAreaField(label="Job Descriptions", default="Paste Job Description Here.")
-    text_input = TextAreaField(label="Instructions", default="Summarize the job applicants fit for the job with 20 bullet points. state the skill match score, weaknesses and skills to improve for perfect match")
+    text_input = TextAreaField(label="Instructions", default="Summarize the job applicants fit for the job in bullet points. State the average skill match score, weaknesses and skills to improve for perfect match at the bottom")
     submit = SubmitField()
 
 
