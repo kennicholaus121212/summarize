@@ -36,11 +36,11 @@ class UploadForm(FlaskForm):
             FileRequired(),
             FileAllowed(["pdf"], "Please Load Your Resume in PDF Format."),
         ],
-        label="Browse To Select Your Resume",
+        label="Browse To Load PDF Resume",
     )
     #pdf_file = 'resume5.pdf'  # Load 'Resume1.pdf' automatically
     text_input1 = TextAreaField(label="Job Descriptions", default="Paste Job Description Here.")
-    text_input = TextAreaField(label="Instructions", default="Summarize the job applicants fit for the job in bullet points. State the average skill match score, weaknesses and skills to improve for perfect match at the bottom")
+    text_input = TextAreaField(label="Ask any questions to learn more about the applicant from the uploaded Resume", default="Summarize the job applicants fit for the job in bullet points. State the average skill match score, weaknesses and skills to improve for perfect match at the bottom")
     submit = SubmitField()
 
 
