@@ -40,7 +40,7 @@ class UploadForm(FlaskForm):
     )
     #pdf_file = 'resume5.pdf'  # Load 'Resume1.pdf' automatically
     text_input1 = TextAreaField(label="Job Descriptions", default="Paste Job Description Here.")
-    text_input = TextAreaField(label="Ask any questions to learn more about the applicant from the uploaded Resume", default="Summarize the job applicants fit for the job in bullet points. State the average skill match score, weaknesses and skills to improve for perfect match at the bottom")
+    text_input = TextAreaField(label="Ask any questions to learn more about the applicant from the uploaded Resume", default="Summarize the job applicants fit for the job in bullet points. State the average skill match score, weaknesses and skills to improve for perfect match at the bottom. For each section in the resume, suggest sentences to add or remove for a perfect skill match. please state the added sentence in bullet point and make it a logical flow to the resume. Overall, all your recommendations should result in the job applicant getting hired for the job.")
     submit = SubmitField()
 
 
