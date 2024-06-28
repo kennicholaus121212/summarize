@@ -38,9 +38,9 @@ class UploadForm(FlaskForm):
     #     ],
     #     label="Select a PDF",
     # )
-    pdf_file = 'resume2.pdf'  # Load 'Resume1.pdf' automatically
+    pdf_file = 'resume6.pdf'  # Load 'Resume1.pdf' automatically
 
-    text_input = TextAreaField(label="Instructions", default="Summarize Kenneth Nicholaus resume in 20 lines.")
+    text_input = TextAreaField(label="Instructions", default="Ask any questions from Kenneth Nicholaus resume.")
     submit = SubmitField()
 
 
@@ -66,7 +66,7 @@ def index():
     if form.validate_on_submit():
         # Load the PDF file automatically
         #pdf_file_path = form.pdf_file.data  # Get the PDF file path
-        pdf_file_path = 'resume2.pdf'
+        pdf_file_path = 'resume6.pdf'
         # Load and parse the PDF
         loader = PyPDFLoader(pdf_file_path)
         pages = loader.load_and_split()
@@ -80,7 +80,7 @@ def index():
         # Check if the text is too long for the model
         if word_count < 1000000:
             # Create the prompt
-            prompt = f"{form.text_input.data} The PDF data contains Kenneth Nicholaus resume. He is interested in a generative ai architect position. You should respond in a professional way emphasizing his generative AI skills and experience. Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
+            prompt = f"{form.text_input.data} The PDF data contains Kenneth Nicholaus resume. He is interested in a GenAI Application Lead position at Accenture. You should respond in a professional way emphasizing his generative AI skills, AI, machine learning, domain and consuling experience. Use information only from the PDF to respond.\n\nPDF:\n{combined_text}"
 
             # Generate the response
             response = model.generate_content(
